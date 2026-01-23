@@ -17,17 +17,17 @@ type Blog struct {
 	Description string
 	Body        string
 	PostedAt    time.Time `gorm:"type:timestamp;not null;default:CURRENT_TIMESTAMP"`
-	UserID      int       `gorm:"foreignKey"`
-	Likes       int
-	Comments    int
-	Views       int
+	UserID      uint      `gorm:"foreignKey"`
+	Likes       int       `gorm:"default:0"`
+	Comments    int       `gorm:"default:0"`
+	Views       int       `gorm:"default:0"`
 
 	User User
 }
 
 type Like struct {
 	ID      uint      `gorm:"primaryKey"`
-	UserID  int       `gorm:"foreignKey"`
+	UserID  uint      `gorm:"foreignKey"`
 	LikedAt time.Time `gorm:"type:timestamp;not null;default:CURRENT_TIMESTAMP"`
 
 	User User
@@ -35,7 +35,7 @@ type Like struct {
 
 type Comment struct {
 	ID          uint      `gorm:"primaryKey"`
-	UserID      int       `gorm:"foreignKey"`
+	UserID      uint      `gorm:"foreignKey"`
 	CommentedAt time.Time `gorm:"type:timestamp;not null;default:CURRENT_TIMESTAMP"`
 	CommentText string
 

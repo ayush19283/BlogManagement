@@ -9,12 +9,11 @@ import (
 func SetupRouters(r *gin.Engine) {
 
 	apiGroup := r.Group("/api")
+	apiGroup.POST("/signup", controller.SignUp)
+	apiGroup.POST("/login", controller.Login)
+	apiGroup.POST("/blog", controller.CreateBlog)
 
-	userGroup := apiGroup.Group("/users")
-	{
-		userGroup.POST("/singup", controller.SignUp)
-
-	}
+	apiGroup.GET("/health", HealthCheck)
 
 }
 
